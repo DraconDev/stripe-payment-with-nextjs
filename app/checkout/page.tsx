@@ -9,10 +9,12 @@ const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-export default function App() {
-    const [clientSecret, setClientSecret] = useState<string>("");
+interface Props {
+    items: CartItem[];
+}
 
-    const [items, setItems] = useState<CartItem[]>([]);
+export default function App({ items }: Props) {
+    const [clientSecret, setClientSecret] = useState<string>("");
 
     useEffect(() => {
         async function createPaymentIntent() {
@@ -48,13 +50,6 @@ export default function App() {
     console.log(clientSecret);
     return (
         <div className="App">
-            <button
-                onClick={() =>
-                    setItems([...items, { id: "1", quantity: 1, price: 200 }])
-                }
-            >
-                Add to cart
-            </button>
             {clientSecret && (
                 <Elements options={options} stripe={stripePromise}>
                     <CheckoutForm />
