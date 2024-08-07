@@ -32,7 +32,7 @@ const Page = (props: Props) => {
         <div className="flex w-full flex-col justify-center text-center">
             <div className="">Cart</div>
             <button onClick={() => addItemToCart({ quantity: 1, price: 1000 })}>
-                Add
+                Add item
             </button>
             <Link href="/checkout" className="">
                 Checkout
