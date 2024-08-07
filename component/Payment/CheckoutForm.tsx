@@ -8,7 +8,7 @@ import {
     IS_TEST_MODE,
     PAYMENT_RETURN_URL,
     TEST_CARD_NUMBER,
-} from "@/const/const";
+} from "@/consts/const";
 
 export default function CheckoutForm() {
     const stripe = useStripe();

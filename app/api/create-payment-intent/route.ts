@@ -1,4 +1,4 @@
-import { zeroDecimalCurrencies } from "@/const/const";
+import { zeroDecimalCurrencies } from "@/consts/const";
 import { CartItem } from "@/types/cart";
 import { NextRequest, NextResponse } from "next/server";
 
