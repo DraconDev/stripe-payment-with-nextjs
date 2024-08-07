@@ -4,6 +4,11 @@ import {
     useStripe,
     useElements,
 } from "@stripe/react-stripe-js";
+import {
+    IS_TEST_MODE,
+    PAYMENT_RETURN_URL,
+    TEST_CARD_NUMBER,
+} from "@/const/const";
 
 export default function CheckoutForm() {
     const stripe = useStripe();
@@ -60,7 +65,7 @@ export default function CheckoutForm() {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "http://localhost:3000",
+                return_url: PAYMENT_RETURN_URL,
             },
         });
 
@@ -81,37 +86,27 @@ export default function CheckoutForm() {
     const paymentElementOptions = {};
 
     return (
-        <form
-            id="payment-form"
-            onSubmit={handleSubmit}
-            style={{ maxWidth: "600px", margin: "0 auto" }}
-        >
-            <PaymentElement
-                id="payment-element"
-                options={paymentElementOptions}
-            />
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    width: "100%",
-                }}
-            >
-                <button
-                    disabled={isLoading || !stripe || !elements}
-                    id="submit"
-                >
-                    <span id="button-text">
-                        {isLoading ? (
-                            <div className="spinner" id="spinner"></div>
-                        ) : (
-                            "Pay now"
-                        )}
-                    </span>
-                </button>
+        <div className="">
+            <div>
+                {IS_TEST_MODE
+                    ? "Use this card to test: " + TEST_CARD_NUMBER
+                    : ""}
             </div>
-            {/* Show any error or success messages */}
-            {message && <div id="payment-message">{message}</div>}
-        </form>
+            <form id="payment-form" onSubmit={handleSubmit}>
+                <PaymentElement
+                    id="payment-element"
+                    // options={paymentElementOptions}
+                />
+                <div style={{ display: "flex", justifyContent: "end" }}>
+                    <button
+                        disabled={isLoading || !stripe || !elements}
+                        id="submit"
+                    >
+                        {isLoading ? "Processing..." : "Pay now"}
+                    </button>
+                </div>
+                {message && <div id="payment-message">{message}</div>}
+            </form>
+        </div>
     );
 }

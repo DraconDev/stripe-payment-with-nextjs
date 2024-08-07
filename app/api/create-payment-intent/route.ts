@@ -1,33 +1,8 @@
+import { zeroDecimalCurrencies } from "@/const/const";
 import { CartItem } from "@/types/cart";
 import { NextRequest, NextResponse } from "next/server";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
-export const zeroDecimalCurrencies = new Set([
-    "BIF",
-    "CLP",
-    "DJF",
-    "GNF",
-    "JPY",
-    "KMF",
-    "KRW",
-    "MGA",
-    "PYG",
-    "RWF",
-    "UGX",
-    "VND",
-    "VUV",
-    "XAF",
-    "XOF",
-    "XPF",
-    // ... add any other zero-decimal currencies
-]);
-
-export const IS_TEST_MODE = true;
-
-export const ACTIVE_CURRENCY = "usd";
-
-export const TEST_CARD_NUMBER = "4242 4242 4242 4242";
 
 const calculateOrderAmount = (items: CartItem[], currency: string) => {
     let sum = 0;
@@ -40,7 +15,7 @@ const calculateOrderAmount = (items: CartItem[], currency: string) => {
     return currency in zeroDecimalCurrencies ? sum : sum * 100;
 };
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
     const { items, currency }: { items: CartItem[]; currency: string } =
         await req.json();
 

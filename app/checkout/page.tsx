@@ -3,22 +3,20 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import CheckoutForm from "../../component/Payment/CheckoutForm";
-import { CartItem } from "@/types/cart";
+import { getCartItems } from "@/utils/cart";
 
 const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-interface Props {
-    items: CartItem[];
-}
-
-export default function App({ items }: Props) {
+export default function App() {
     const [clientSecret, setClientSecret] = useState<string>("");
 
     useEffect(() => {
         async function createPaymentIntent() {
             setClientSecret("");
+            const items = getCartItems();
+
             if (items.length === 0) {
                 return;
             }
@@ -42,19 +40,26 @@ export default function App({ items }: Props) {
         }
 
         createPaymentIntent();
-    }, [items]);
+    }, []);
+
+    const appearance = {
+        theme: "stripe" as "stripe" | "night" | "flat" | undefined,
+    };
 
     const options = {
         clientSecret,
+        appearance,
     };
     console.log(clientSecret);
     return (
-        <div className="App">
-            {clientSecret && (
-                <Elements options={options} stripe={stripePromise}>
-                    <CheckoutForm />
-                </Elements>
-            )}
+        <div className="w-full flex justify-center p-2">
+            <div className="bg-card p-2 rounded-md">
+                {clientSecret && (
+                    <Elements options={options} stripe={stripePromise}>
+                        <CheckoutForm />
+                    </Elements>
+                )}
+            </div>
         </div>
     );
 }
