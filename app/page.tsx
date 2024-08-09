@@ -4,7 +4,7 @@ export default function Home() {
     return (
         <main className="flex items-center  flex-col w-full ">
             <Link className="flex " href="/cart">
-                Go go cart
+                Go to cart
             </Link>
         </main>
     );

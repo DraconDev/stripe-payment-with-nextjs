@@ -40,7 +40,7 @@ export default function App() {
         }
 
         createPaymentIntent();
-    }, []);
+    }, []);12
 
     const appearance = {
         theme: "stripe" as "stripe" | "night" | "flat" | undefined,
