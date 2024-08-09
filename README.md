@@ -4,8 +4,9 @@
 
 # https://dashboard.stripe.com/apikeys
 
-`NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-
-STRIPE_SECRET_KEY=`
+```
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+```
 
 First in test mode!
