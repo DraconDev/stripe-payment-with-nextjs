@@ -25,6 +25,9 @@ const Page = (props: Props) => {
             <button onClick={() => addItemToCart({ quantity: 1, price: 1000 })}>
                 Add item
             </button>
+            <span className="text-xs text-gray-600">
+                (added to local storage for test)
+            </span>
             <Link href="/checkout" className="">
                 Checkout
             </Link>
