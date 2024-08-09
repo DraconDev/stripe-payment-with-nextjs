@@ -1,12 +1,11 @@
 ## Basic of how to use stripe with nextjs
 
-1. make .env.local
+1. Get api keys
+   https://dashboard.stripe.com/apikeys
 
-# https://dashboard.stripe.com/apikeys
+2. make .env.local and add them
 
 ```
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_SECRET_KEY=
 ```
-
-First in test mode!
