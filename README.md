@@ -1,4 +1,4 @@
-## Basic of how to use stripe with nextjs
+## Basic How to use stripe with nextjs
 
 1. Get api keys
 
